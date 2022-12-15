@@ -1,5 +1,5 @@
 import Router from 'koa-router'
-import * as postsctrl from './posts.ctrl'
+import * as postsctrl from './posts.ctrl.js'
 
 const posts = new Router();
 
@@ -9,4 +9,5 @@ posts.get('/:id',postsctrl.read)
 posts.delete('/:id',postsctrl.remove)
 posts.put('/:id',postsctrl.replace)
 posts.patch('/:id',postsctrl.update)
-module.exports = posts
+
+export default posts;

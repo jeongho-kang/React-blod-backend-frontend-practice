@@ -13,7 +13,7 @@ const posts = [
     POST /api/posts
     {title,body}
 */ 
-exports.write = ctx => {
+export const write = ctx => {
     // REST API의 Request Body는 ctx.request.body에서 조회할 수 있다.
     const {title,body} = ctx.request.body
     postId += 1 // 기존 postId 값에 1을 더한다
@@ -24,13 +24,13 @@ exports.write = ctx => {
 /* 포스트 목록조회
     GET /api/posts
 */ 
-exports.list = ctx => {
+export const list = ctx => {
     ctx.body = posts
 }
 /* 특정 포스트 조회 
     GET /api/posts/:id
 */
-exports.read = ctx => {
+export const read = ctx => {
     const {id} = ctx.params
     // 주어진 id 값으로 파라미터를 찾는다
     // 파라미터로 받아온 값은 문자열 형식이므로 파마리터를 숫자로 변환하거나
@@ -49,7 +49,7 @@ exports.read = ctx => {
 /* 특정 포스트 제거 
     DELETE api/posts/:id
 */
-exports.remove = ctx => {
+export const remove = ctx => {
     const {id} = ctx.params
     // 해당 id를 가진 post가 몇번쨰인지 확인한다
     const index = posts.findIndex(p => p.id.toString() === id)
@@ -69,7 +69,7 @@ exports.remove = ctx => {
     PUT /api/posts/:id
     {title,body}
 */
-exports.replace = ctx => {
+export const replace = ctx => {
     // PUT 메서드는 전체 정보를 입력하여 데이터를 통쨰로 교체할 때 사용
     const {id} = ctx.params
     // 해당 id를 가진 post가 몇번쨰인지 확인
@@ -94,7 +94,7 @@ exports.replace = ctx => {
     PATCH /api/post/:id
     {title, body}
 */
-exports.update = ctx => {
+export const update = ctx => {
     // PATCH에서는 주어진 필드만 교체한다.
     const {id} = ctx.params
     // 해당 id를 가진 post가 몇번쨰인지 확인한다.
