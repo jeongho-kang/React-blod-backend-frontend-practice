@@ -1,6 +1,20 @@
+require('dotenv').config()
 const Koa = require('Koa')
 const Router = require('koa-router')
 const bodyparser = require('koa-bodyparser')
+const mongoose = require('mongoose')
+
+const {PORT,} = process.env
+
+mongoose
+.set('strictQuery',true)
+    .connect("mongodb://127.0.0.1:27017/blog")
+    .then(() => {
+        console.log("connected to MongoDB")
+})
+    .catch(e => {
+        console.error(e)
+})
 
 const api = require('./api')
 
@@ -15,8 +29,9 @@ app.use(bodyparser())
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods())
 
-app.listen(4000, () => {
-    console.log("Listening to port 4000");
+const port = PORT || 4000
+app.listen(port, () => {
+    console.log(`Listening to port ${port}`);
 })
 
 
